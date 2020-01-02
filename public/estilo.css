@@ -23,12 +23,13 @@ body {
 @media screen and (max-width: 425px) {
     #logo_empresa {
         width: 65%!important;
+		animation:opac 1.6s}@keyframes opac{from{opacity:0} to{opacity:1};
     }
 }
 
 #logo_empresa {
     width: 65%;
-    animation:opac 1.0s}@keyframes opac{from{opacity:0} to{opacity:1};
+	animation:opac 1.6s}@keyframes opac{from{opacity:0} to{opacity:1};
     /*Quando for telas maiores que 425px*/
 }
 
