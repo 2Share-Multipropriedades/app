@@ -101,7 +101,6 @@ function trazer_lead() {
                     }
                     $('.windows8').hide();
                     $('#carregando').hide();
-                    $('.carregado').show();
                 })
 
                 break;
@@ -409,5 +408,5 @@ function CalculateDigit2(CPF) {
 
 }
 
-
+function aparecer_form() { $('.carregado').show(); }
 

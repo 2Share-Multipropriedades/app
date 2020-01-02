@@ -97,7 +97,7 @@ app.get('/lead/*', function (req, res) {
     res.render('lead_cadastro', {
         title: 'FAÇA JA SEU CADASTRO',
         script: '<script src="../../codigoJS/lead.js"></script>',
-        splash: '<div class="modal fade" id="splash" tabindex="-1" role="dialog" aria-hidden="true">' +
+        splash: '<div class="modal fade" id="splash" tabindex="-1" role="dialog" aria-hidden="true" onclick="aparecer_form()">' +
             '<div class="modal-dialog modal-full" role="document">' +
             '<div class="modal-content p-0 m-0">' +
             '<div class="modal-body  p-0 m-0 d-flex align-items-center justify-content-center" id="result">' +
