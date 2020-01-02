@@ -1,0 +1,38 @@
+<!--Titulo da Página-->
+<div class="col-md-12 text-center pb-3" id="titulo">
+    <h3>PROMOTER | LOGIN</h3>
+</div>
+<!--FIM Titulo da Página-->
+
+<!--Formulário de Login-->
+<div class="col-sm">
+    <form>
+        <div class="row">
+            <div class="form-group col-sm col-md-6">
+                <input type="email" class="form-control" placeholder="E-mail" name="email" id="email">
+            </div>
+            <div class="form-group col-sm col-md-6">
+                <input type="password" class="form-control" placeholder="Senha" name="senha" id="senha">
+            </div>
+            <div class="form-group col-4">
+                <select name="" id="estado" class="form-control col-sm" onchange="carregar_cidades()">
+                    <option value="">Estado</option>
+                </select>
+            </div>
+            <div class="form-group col-8">
+                <select name="" id="cidade" class="form-control col-sm" onchange="carregar_paceiros()">
+                    <option value="">Cidade</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-12">
+                <select name="" id="parceiro" class="form-control col-sm">
+                    <option value="">Parceiro</option>
+                </select>
+            </div>
+            <div class="form-group col-sm">
+                <button class="btn btn-block btn-claro-VCI" id="promoter_btn_registro">Entrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--Formulário de Login-->

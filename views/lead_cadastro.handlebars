@@ -1,0 +1,122 @@
+
+<!--Titulo da Página-->
+<div class="col-sm-12 text-center pb-3" id="titulo">
+  <h3>SE PERMITA VIVER EXPERIÊNCIAS INCRÍVEIS!</h3>
+</div>
+<!--FIM Titulo da Página-->
+
+<!--Formulário de cadastro completo do lead-->
+<div class="col-sm">
+
+  <div class="form-group col-sm">
+    <input aria-label="Nome" class="form-control form-control name" placeholder="Nome" type="text" name="fields[NAME]"
+      id="field-nome" required="required" aria-required="true">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control cpf" type="text" name="fields[UF_CRM_5D0D23AC4DE21]" id="field-cpf"
+      placeholder="CPF: 99999999999" required="required" aria-required="true" onblur="validar_cpf()">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control email" type="email" name="fields[EMAIL][0][VALUE]" id="field-email"
+      placeholder="E-mail" onblur="validar_email()">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control" type="number" name="fields[UF_CRM_1559238354]" id="field-idade"
+      placeholder="Idade" required="required" aria-required="true" min="20" max="80">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-profissao"
+      placeholder="Profissão" required="required" aria-required="true">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <select class="form-control form-control estado-civil" name="fields[UF_CRM_5CEFC4776D26B]" id="field-estado-civil"
+      required="required" aria-required="true">
+      <option value="">Estado Civil</option>
+      <option value="1376">Solteiro</option>
+      <option value="1378">Casado</option>
+      <option value="1380">Viúvo</option>
+      <option value="1382">Separado judicialmente</option>
+      <option value="1384">Divorciado</option>
+      <option value="4886">União estável</option>
+      <option value="10074">Não informado</option>
+    </select>
+  </div>
+
+
+  <div class="form-group col-sm" id="renda_frango">
+    <select name="UF_CRM_5CEFC4777B306" tabindex="0" id="field-renda" class="form-control">
+      <option value="" selected="selected">Renda Familiar</option>
+      <option value="1386">Até R$ 4.000,00</option>
+      <option value="1388">De R$ 4.000 a R$ 8.000</option>
+      <option value="1390">De R$ 8.000 a R$ 12.000</option>
+      <option value="1392">De R$ 12.000 a R$ 16.000</option>
+      <option value="1394">De R$ 16.000 a R$ 20.000</option>
+      <option value="1396">Acima de R$ 20.000</option>
+      <option value="3576">Não informado</option>
+    </select>
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-ultima-viagem"
+      placeholder="Última viagem" required="required" aria-required="true">
+  </div>
+
+
+  <div class="form-group col-sm">
+    <select name="UF_CRM_1577122100" id="field-ano_ultima_viagem" class="form-control col-sm">
+      <option value="" selected="selected">Ano da última viagem</option>
+      <option value="11690">Menos de 1 ano</option>
+      <option value="11692">1 a 2 anos atrás</option>
+      <option value="11694">2 a 3 anos atrás</option>
+      <option value="11696">3 a 4 anos atrás</option>
+      <option value="11698">4 a 5 anos atrás</option>
+      <option value="11700">Mais de 5 anos atrás</option>
+    </select>
+  </div>
+
+
+  <div class="form-group col-sm">
+    <input class="form-control form-control" type="text" name="fields[UF_CRM_1577121920]" id="field-viagem-dos-sonhos"
+      placeholder="Qual a viagem dos seus sonhos" required="required" aria-required="true">
+  </div>
+
+
+  <div class="form-group col-sm text-center">
+    <label class="">
+      <a id="termo_compromisso">Termos de Compromisso</a>
+    </label>
+  </div>
+
+
+  <div class="form-group form-check col-sm pl-5">
+    <input type="checkbox" class="form-check-input" id="confirmo" required>
+    <label class="form-check-label text-white">Li e aceito os termos </label> <label class="text-gold"> *</label>
+  </div>
+
+
+  <!--Carregar automático-->
+  <input type="hidden" name="fields[fields[PHONE][0][VALUE]]" value="XXXXXX" id="telefone">
+  <input type="hidden" name="fields[UF_CRM_1575626649]" id="ID-CRM-PROMOTORA">
+  <input type="hidden" name="fields[UF_CRM_1559221906859]" id="NOME-DO-PARCEIRO">
+  <input type="hidden" name="fields[UF_CRM_1559237906]" id="ID-TIME-VENDAS">
+  <input type="hidden" name="" id="NOME_PROMOTORA">
+  <!-- (3S Fortaleza: 10070, 3S Londrina: 10064, 3S São Paulo: 5786) -->
+  <!--FIM Carregar automático-->
+
+
+  <div class="form-group col-sm">
+    <button class="btn btn-block btn-claro-VCI" id="cadastrar_lead">Cadastrar</button>
+  </div>
+</div>
+<!--FIM Formulário de cadastro completo do lead-->
