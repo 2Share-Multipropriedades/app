@@ -308,7 +308,7 @@ $("#enviar_SMS").on("click", function (e) {
             case 'Lead_OK':
                 var codigo_lead = btoa(resposta.id_lead)
                 //Mensagem
-                var mensagem = 'Acesse o link abaixo, complete seu cadastro. Viva uma grande experiencia com o Residence Club at the Hard Rock Hotel. https://tinyurl.com/qmhb9r6/' + codigo_lead
+                var mensagem = 'Acesse o link abaixo, complete seu cadastro. Venha conhecer o Residence Club at the Hard Rock Hotel. http://lead.vcisa.com/lead/' + codigo_lead
 
                 //FIM Mensagem
 
