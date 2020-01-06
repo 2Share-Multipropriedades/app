@@ -9,7 +9,6 @@ const db = require('./models/config_banco')
 
 
 
-
 //Importando os Modles
 const promoter = require('./models/Promoter');
 const parceiro = require('./models/Parceiro');
@@ -51,7 +50,7 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-app.use('/promoter-cadastro', apiRoutes);
+//app.use('/promoter-cadastro', apiRoutes);
 
 
 
@@ -101,7 +100,7 @@ app.get('/lead/*', function (req, res) {
             '<div class="modal-dialog modal-full" role="document">' +
             '<div class="modal-content p-0 m-0">' +
             '<div class="modal-body  p-0 m-0 d-flex align-items-center justify-content-center" id="result">' +
-            '<a href="#" data-dismiss="modal" aria-label="Close"> <img src="../../imagens/inicio.jpeg" class="img-fluid" alt="Imagem responsiva"></a>' +
+            '<a href="" data-dismiss="modal" aria-label="Close"> <img src="../../imagens/inicio.jpeg" class="img-fluid" alt="Imagem responsiva"></a>' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -360,3 +359,4 @@ app.get('/carregar_parceiros', function (req, res) {
 //FIM Rotas de REQUISIÇÃO
 
 app.listen(8091)
+//app.listen(81, '192.168.174.12')

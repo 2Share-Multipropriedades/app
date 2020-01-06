@@ -1,7 +1,5 @@
 $('document').ready(function () {
 
-    $('#splash').modal('show')
-    
     $('#carregando').hide();
     $('.windows8').hide();
     //$('.carregado').show();
@@ -14,99 +12,116 @@ $('document').ready(function () {
     trazer_lead();
     //FIM Procura o Lead
 
-    
+    setTimeout(function () {
+        $('#splash').modal('hide');
+        $('.carregado').show();
+    }, 3000); // 3000 = 3 segundos
+
 })
 
 function trazer_lead() {
     var url01 = window.location.href;
     var url02 = url01.split('/');
     var url03 = url02[4];
-
-    try {
-        var codigo = atob(url03)
-    } catch (error) {
+    console.log(url03)
+    if (url03 == '') {
         Swal.fire({
             icon: 'error',
-            text: 'Desculpe, algo deu errado e não consegui te indentificar, verifique a URL fornecida novamente.',
+            text: 'Seu link esta sem o código',
             allowOutsideClick: false,
             allowEscapeKey: false,
             showConfirmButton: false
         })
+    } else {
+        try {
+            var codigo = atob(url03)
+            console.log(url03)
+            console.log(codigo)
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                text: 'Desculpe, algo deu errado e não consegui te indentificar, verifique a URL fornecida novamente.',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false
+            })
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/carregar_lead',
+            data: {
+                codigo: codigo
+            },
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+
+        }).done(function (resposta) {
+
+            switch (resposta.status) {
+                case 'Erro_Lead':
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Desculpe, algo deu errado e não consegui te indentificar, verifique a URL fornecida novamente.',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        showConfirmButton: false
+                    })
+                    break;
+
+                case 'Lead_ERROR':
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Esse código ja foi usado',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        showConfirmButton: false
+                    })
+                    break;
+
+                case 'Lead_OK':
+                    $('#splash').modal('show')
+                    $('#field-nome').val(resposta.nome);
+                    $('#telefone').val(resposta.celular);
+                    $('#ID-CRM-PROMOTORA').val(resposta.promoter_crm);
+                    $('#NOME_PROMOTORA').val(resposta.promoter_nome);
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/carregar_lead/parceiro',
+                        data: {
+                            id_parceiro: resposta.id_parceiro
+                        },
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded',
+
+                    }).done(function (resposta) {
+                        $('#NOME-DO-PARCEIRO').val(resposta.nome);
+
+                        switch (resposta.estado) {
+                            case 2:
+                                $('#ID-TIME-VENDAS').val('5786');
+                                break;
+                            case 3:
+                                $('#ID-TIME-VENDAS').val('10070');
+                                break;
+                            case 4:
+                                $('#ID-TIME-VENDAS').val('10064');
+                                break;
+
+                        }
+                        $('.windows8').hide();
+                        $('#carregando').hide();
+                        //$('.carregado').show();
+                    })
+
+                    break;
+
+            }
+        })
     }
 
-
-
-    $.ajax({
-        type: 'POST',
-        url: '/carregar_lead',
-        data: {
-            codigo: codigo
-        },
-        dataType: 'json',
-        contentType: 'application/x-www-form-urlencoded',
-
-    }).done(function (resposta) {
-
-        switch (resposta.status) {
-            case 'Erro_Lead':
-                Swal.fire({
-                    icon: 'error',
-                    text: 'Desculpe, algo deu errado e não consegui te indentificar, verifique a URL fornecida novamente.',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    showConfirmButton: false
-                })
-                break;
-
-            case 'Lead_ERROR':
-                Swal.fire({
-                    icon: 'error',
-                    text: 'Esse código ja foi usado',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    showConfirmButton: false
-                })
-                break;
-
-            case 'Lead_OK':
-                $('#field-nome').val(resposta.nome);
-                $('#telefone').val(resposta.celular);
-                $('#ID-CRM-PROMOTORA').val(resposta.promoter_crm);
-                $('#NOME_PROMOTORA').val(resposta.promoter_nome);
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/carregar_lead/parceiro',
-                    data: {
-                        id_parceiro: resposta.id_parceiro
-                    },
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded',
-
-                }).done(function (resposta) {
-                    $('#NOME-DO-PARCEIRO').val(resposta.nome);
-
-                    switch (resposta.estado) {
-                        case 2:
-                            $('#ID-TIME-VENDAS').val('5786');
-                            break;
-                        case 3:
-                            $('#ID-TIME-VENDAS').val('10070');
-                            break;
-                        case 4:
-                            $('#ID-TIME-VENDAS').val('10064');
-                            break;
-
-                    }
-                    $('.windows8').hide();
-                    $('#carregando').hide();
-                })
-
-                break;
-
-        }
-    })
 }
 
 
@@ -184,7 +199,7 @@ $("#cadastrar_lead").on("click", function (e) {
                     var url02 = url01.split('/');
                     var url03 = url02[4];
                     var codigo = atob(url03)
-                    
+
                     $.ajax({
                         url: '/lead/confirmar-cadastro',
                         type: 'POST',
@@ -195,11 +210,11 @@ $("#cadastrar_lead").on("click", function (e) {
                         contentType: 'application/x-www-form-urlencoded',
 
                     }).done(function (resposta) {
-                        if(resposta.status == 'ok'){
+                        if (resposta.status == 'ok') {
                             window.location.href = '\\agradecimento\\positivo'
                         }
                     })
-                    
+
                 })
             })
         } else {
@@ -408,5 +423,8 @@ function CalculateDigit2(CPF) {
 
 }
 
-function aparecer_form() { $('.carregado').show(); }
 
+
+function aparecer_form() {
+    $('.carregado').show();
+}

@@ -124,7 +124,7 @@ $("#promoter_btn_registro").on("click", function (e) {
                                     'id_parceiro': parceiro,
                                     'token': token,
                                     'crm': resposta.crm,
-                                    'nome_promoter':  resposta.nome_promoter
+                                    'nome_promoter': resposta.nome_promoter
                                 },
                                 dataType: 'json',
                                 contentType: 'application/x-www-form-urlencoded',
@@ -275,86 +275,98 @@ $("#enviar_SMS").on("click", function (e) {
     var nome = $('#nome').val();
     var telefone = $('#celular').val();
 
-    //tirar os caracteres especiais do telefone
-    var numero = telefone.substr(1, 2) + telefone.substr(5, 5) + telefone.substr(11, 4);
-    //FIM tirar os caracteres especiais do telefone
+    if (nome == "" || telefone == "") {
+        Swal.fire({
+            icon: 'error',
+            text: 'Nenhum campo pode ficar vazio',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            confirmButtonText: 'Ok',
+        })
+    } else {
+        //tirar os caracteres especiais do telefone
+        var numero = telefone.substr(1, 2) + telefone.substr(5, 5) + telefone.substr(11, 4);
+        //FIM tirar os caracteres especiais do telefone
 
-    $.ajax({
-        type: 'POST',
-        url: '/salvar-lead',
-        data: {
-            id_parceiro: localStorage.getItem('parceiro'),
-            id_promoter: localStorage.getItem('promoter'),
-            promoter_crm: localStorage.getItem('crm'),
-            nome: nome,
-            numero_celular: numero,
-            nome_promoter: localStorage.getItem('nome_promoter'),
-        },
-        dataType: 'json',
-        contentType: 'application/x-www-form-urlencoded',
+        $.ajax({
+            type: 'POST',
+            url: '/salvar-lead',
+            data: {
+                id_parceiro: localStorage.getItem('parceiro'),
+                id_promoter: localStorage.getItem('promoter'),
+                promoter_crm: localStorage.getItem('crm'),
+                nome: nome,
+                numero_celular: numero,
+                nome_promoter: localStorage.getItem('nome_promoter'),
+            },
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
 
-    }).done(function (resposta) {
-        switch (resposta.status) {
-            case 'Erro_Lead':
-                Swal.fire({
-                    icon: 'error',
-                    text: 'Algo deu errado ao salvar o Lead, tente novamente mais tarde...',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    confirmButtonText: 'Ok',
-                })
-                break;
+        }).done(function (resposta) {
+            switch (resposta.status) {
+                case 'Erro_Lead':
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Algo deu errado ao salvar o Lead, tente novamente mais tarde...',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        confirmButtonText: 'Ok',
+                    })
+                    break;
 
-            case 'Lead_OK':
-                var codigo_lead = btoa(resposta.id_lead)
-                //Mensagem
-                var mensagem = 'Acesse o link abaixo, complete seu cadastro. Venha conhecer o Residence Club at the Hard Rock Hotel. http://lead.vcisa.com/lead/' + codigo_lead
+                case 'Lead_OK':
+                    var codigo_lead = btoa(resposta.id_lead)
+                    localStorage.setItem('id_lead', codigo_lead)
+                    //Mensagem
+                    var mensagem = 'Acesse o link abaixo, complete seu cadastro. Viva uma grande experiencia com o Residence Club at the Hard Rock Hotel. http://lead.vcisa.com/lead/' + codigo_lead
 
-                //FIM Mensagem
+                    //FIM Mensagem
 
-                //URL para envio de SMS
-                var url_SMS = 'https://api-http.zenvia.com/GatewayIntegration/msgSms.do?dispatch=send&account=venture.smsonline&code=3Xyy5vhKh2&to=55' + numero + '&msg=' + mensagem
-                //FIM URL para envio de SMS
+                    //URL para envio de SMS
+                    var url_SMS = 'https://api-http.zenvia.com/GatewayIntegration/msgSms.do?dispatch=send&account=venture.smsonline&code=3Xyy5vhKh2&to=55' + numero + '&msg=' + mensagem
+                    //FIM URL para envio de SMS
 
-                $.ajax({
-                    type: 'GET',
-                    url: url_SMS,
-                    beforeSend: function () {
-                        Swal.fire({
-                            title: 'Enviando...',
-                            text: 'Por favor aguarde',
-                            timerProgressBar: true,
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
-                }).done(function (resposta) {
-                    //console.log(resposta)
-                    if (resposta == '000 - Message Sent') {
-                        Swal.fire({
-                            icon: 'success',
-                            text: 'Mensagem enviada com sucesso',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                            confirmButtonText: 'Ok',
-                        })
-                        $('#nome').val('');
-                        $('#celular').val('');
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            text: 'Número de celular incorreto ou incompleto',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                            confirmButtonText: 'Ok',
-                        })
-                    }
-                })
-                break;
+                    $.ajax({
+                        type: 'GET',
+                        url: url_SMS,
+                        beforeSend: function () {
+                            Swal.fire({
+                                title: 'Enviando...',
+                                text: 'Por favor aguarde',
+                                timerProgressBar: true,
+                                onBeforeOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            })
+                        },
+                    }).done(function (resposta) {
+                        console.log(resposta)
+                        if (resposta == '000 - Message Sent') {
+                            Swal.fire({
+                                icon: 'success',
+                                html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div> <div class="col-sm-12" id="qrcode"></div>',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                confirmButtonText: 'Ok',
+                            })
+                            gerar_qrcode(localStorage.getItem('id_lead'))
+                            $('#nome').val('');
+                            $('#celular').val('');
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Número de celular incorreto ou incompleto',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                confirmButtonText: 'Ok',
+                            })
+                        }
+                    })
+                    break;
 
-        }
-    })
+            }
+        })
+    }
 })
 
 
@@ -372,3 +384,10 @@ $.ajax({
 })
 */
 
+function gerar_qrcode(id) {
+    new QRCode(document.getElementById("qrcode"), {
+        text: "http://lead.vcisa.com/lead/" + id,
+        width: 150,
+        height: 150,
+    })
+}
