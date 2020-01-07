@@ -5,18 +5,18 @@
 
 body {
     font-family: 'Ubuntu', sans-serif;
-    background-image: url('../../imagens/00-fundo.png');
+    background-image: url('../../imagens/00-fundo.jpg');
 }
 
 @media screen and (max-width: 360px) {
     body {
-        background-image: url('../../imagens/02-fundo.png')!important;
+        background-image: url('../../imagens/02-fundo.jpg')!important;
     }
 }
 
 @media screen and (max-width: 720px) {
     body {
-        background-image: url('../../imagens/01-fundo.png');
+        background-image: url('../../imagens/01-fundo.jpg');
     }
 }
 
