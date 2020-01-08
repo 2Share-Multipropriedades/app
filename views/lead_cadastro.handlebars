@@ -1,4 +1,3 @@
-
 <!--Titulo da Página-->
 <div class="col-sm-12 text-center pb-3" id="titulo">
   <h3>SE PERMITA VIVER EXPERIÊNCIAS INCRÍVEIS!</h3>
@@ -9,38 +8,38 @@
 <div class="col-sm">
 
   <div class="form-group col-sm">
-    <input aria-label="Nome" class="form-control form-control name" placeholder="Nome" type="text" name="fields[NAME]"
+    <input aria-label="Nome" class="form-control name" placeholder="Nome" type="text" name="fields[NAME]"
       id="field-nome" required="required" aria-required="true">
   </div>
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control cpf" type="text" name="fields[UF_CRM_5D0D23AC4DE21]" id="field-cpf"
+    <input class="form-control cpf" type="text" name="fields[UF_CRM_5D0D23AC4DE21]" id="field-cpf"
       placeholder="CPF: 99999999999" required="required" aria-required="true" onblur="validar_cpf()">
   </div>
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control email" type="email" name="fields[EMAIL][0][VALUE]" id="field-email"
-      placeholder="E-mail" onblur="validar_email()">
+    <input class="form-control email" type="email" name="fields[EMAIL][0][VALUE]" id="field-email" placeholder="E-mail"
+      onblur="validar_email()">
   </div>
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control" type="number" name="fields[UF_CRM_1559238354]" id="field-idade"
-      placeholder="Idade" required="required" aria-required="true" min="20" max="80">
+    <input class="form-control" type="number" name="fields[UF_CRM_1559238354]" id="field-idade" placeholder="Idade"
+      required="required" aria-required="true" min="20" max="80">
   </div>
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-profissao"
+    <input class="form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-profissao"
       placeholder="Profissão" required="required" aria-required="true">
   </div>
 
 
   <div class="form-group col-sm">
-    <select class="form-control form-control estado-civil" name="fields[UF_CRM_5CEFC4776D26B]" id="field-estado-civil"
-      required="required" aria-required="true">
+    <select class="form-control estado-civil" name="fields[UF_CRM_5CEFC4776D26B]" id="field-estado-civil"
+      required="required" aria-required="true" onchange="liberar_conjuge()">
       <option value="">Estado Civil</option>
       <option value="1376">Solteiro</option>
       <option value="1378">Casado</option>
@@ -52,6 +51,9 @@
     </select>
   </div>
 
+  <div class="form-group col-sm">
+    <input type="text" class="form-control" name="UF_CRM_1559220378" id="conjuge" placeholder="Nome do Cônjuge">
+  </div>
 
   <div class="form-group col-sm" id="renda_frango">
     <select name="UF_CRM_5CEFC4777B306" tabindex="0" id="field-renda" class="form-control">
@@ -68,7 +70,7 @@
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-ultima-viagem"
+    <input class="form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-ultima-viagem"
       placeholder="Última viagem" required="required" aria-required="true">
   </div>
 
@@ -87,7 +89,7 @@
 
 
   <div class="form-group col-sm">
-    <input class="form-control form-control" type="text" name="fields[UF_CRM_1577121920]" id="field-viagem-dos-sonhos"
+    <input class="form-control" type="text" name="fields[UF_CRM_1577121920]" id="field-viagem-dos-sonhos"
       placeholder="Qual a viagem dos seus sonhos" required="required" aria-required="true">
   </div>
 

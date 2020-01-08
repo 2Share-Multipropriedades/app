@@ -23,6 +23,7 @@ body {
 @media screen and (max-width: 425px) {
     #logo_empresa {
         width: 65%!important;
+		animation:opac 1.0s}@keyframes opac{from{opacity:0} to{opacity:1};
     }
 }
 
@@ -90,6 +91,20 @@ body {
 
 .swal2-show{
     width: 85%!important;
+}
+
+#whats{
+    width: 35px;
+}
+
+.btn-success2{
+    color: #fff;
+    background-color: #009846;
+    border-color: #009846;
+}
+
+.data{
+    font-size: small;
 }
 /*FIM Classe com o tema da VCI*/
 

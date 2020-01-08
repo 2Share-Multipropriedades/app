@@ -1,5 +1,7 @@
 $('document').ready(function () {
-
+    $('#conjuge').val('1');
+    $('#conjuge').hide();
+    $('#conjuge').hide();
     $('#carregando').hide();
     $('.windows8').hide();
     //$('.carregado').show();
@@ -23,7 +25,6 @@ function trazer_lead() {
     var url01 = window.location.href;
     var url02 = url01.split('/');
     var url03 = url02[4];
-    console.log(url03)
     if (url03 == '') {
         Swal.fire({
             icon: 'error',
@@ -35,8 +36,6 @@ function trazer_lead() {
     } else {
         try {
             var codigo = atob(url03)
-            console.log(url03)
-            console.log(codigo)
         } catch (error) {
             Swal.fire({
                 icon: 'error',
@@ -128,7 +127,6 @@ function trazer_lead() {
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
-
     if (!validar_campos()) {
         Swal.fire({
             icon: 'warning',
@@ -178,14 +176,13 @@ $("#cadastrar_lead").on("click", function (e) {
                         'fields[UF_CRM_1559221906859]': $('#NOME-DO-PARCEIRO').val(),
                         'fields[UF_CRM_1575626649]': $('#ID-CRM-PROMOTORA').val(),
                         'fields[UF_CRM_1559238324]': $('#field-nome').val(),
-
                         'fields[UF_CRM_1559222048236]': $('#NOME_PROMOTORA').val(), //nome da promotora
-
                         'fields[LAST_NAME]': 'xxx',
                         'fields[UF_CRM_5D0D23AC4DE21]': $('#field-cpf').val(),
                         'fields[UF_CRM_1559238354]': $('#field-idade').val(),
                         'fields[UF_CRM_1559572368]': $('#field-profissao').val(),
                         'fields[UF_CRM_5CEFC4776D26B]': $('#field-estado-civil').val(),
+                        'fields[UF_CRM_1559220378]': $('#conjuge').val(),
                         'fields[UF_CRM_5CEFC4777B306]': $('#field-renda').val(),
                         'fields[UF_CRM_1559221860983]': $('#field-ultima-viagem').val(),
                         'fields[UF_CRM_1577122100]': $('#field-ano_ultima_viagem').val(),
@@ -217,6 +214,7 @@ $("#cadastrar_lead").on("click", function (e) {
 
                 })
             })
+
         } else {
             Swal.fire({
                 icon: 'warning',
@@ -327,6 +325,7 @@ function validar_campos() {
     var ultima_viagem = $('#field-ultima_viagem').val();
     var ano_ultima_viagem = $('#field-ano_ultima_viagem').val();
     var viagem_dos_sonhos = $('#field-viagem_dos_sonhos').val();
+    var conjuge = $('#conjuge').val();
     //field-nome
     //field-cpf
     //field-email
@@ -349,6 +348,8 @@ function validar_campos() {
         (ano_ultima_viagem == '') ||
         (viagem_dos_sonhos == '')
     ) {
+        return false
+    } else if (conjuge != 1) {
         return false
     } else {
         return true
@@ -427,4 +428,21 @@ function CalculateDigit2(CPF) {
 
 function aparecer_form() {
     $('.carregado').show();
+}
+
+
+
+function liberar_conjuge() {
+    if (
+        ($('#field-estado-civil').val() == 1378) ||
+        ($('#field-estado-civil').val() == 4886)
+    ) {
+        $('#conjuge').val('');
+        $('#conjuge').show();
+    } else {
+        $('#conjuge').val('1');
+        $('#conjuge').hide();
+
+    }
+
 }

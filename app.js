@@ -50,7 +50,8 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-//app.use('/promoter-cadastro', apiRoutes);
+app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
+app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
 
 
 
@@ -87,6 +88,28 @@ app.get('/', function (req, res) {
 app.get('/promoter-cadastro', function (req, res) {
     res.render('promoter_cadastro', {
         title: 'PROMOTER | CADASTRO',
+        script: '<script src="../../codigoJS/promoter.js"></script>',
+        navbar: '<nav class="navbar">' +
+            '<a id="voltar" class="text-gold float-left">Voltar</a>' +
+            '<a id="sair" class="text-gold float-right">Sair</a>' +
+            '</nav>'
+    })
+})
+
+app.get('/meus-leads', function (req, res) {
+    res.render('meus-leads', {
+        title: 'PROMOTER | LEADS',
+        script: '<script src="../../codigoJS/meus-leads.js"></script>',
+        navbar: '<nav class="navbar">' +
+            '<a id="voltar" class="text-gold float-left">Voltar</a>' +
+            '<a id="sair" class="text-gold float-right">Sair</a>' +
+            '</nav>'
+    })
+})
+
+app.get('/promoter-menu', function (req, res) {
+    res.render('menu', {
+        title: 'PROMOTER | MENU',
         script: '<script src="../../codigoJS/promoter.js"></script>',
         navbar: '<nav class="navbar"><a id="sair" class="text-gold ml-auto">Sair</a></nav>'
     })
@@ -126,6 +149,27 @@ app.get('/agradecimento/negativo', function (req, res) {
 
 
 //Rotas de REQUISIÇÃO
+app.post('/carregar-meus-leads', function (req, res) {
+    lead.findAll({
+        where: {
+            id_promoter: req.body.id,
+            status: 'Não Cadastrado'
+        }
+    }).then(function (lead) {
+        var leads = []
+        lead.forEach(element => {
+            leads.push(element.id)
+            leads.push(element.nome)
+            leads.push(element.celular)
+            leads.push(element.status)
+        })
+        httpmsg.sendJSON(req, res, {
+            status: 'success',
+            dados: leads
+        })
+    })
+})
+
 app.post('/gerar_token', function (req, res) {
 
     var email = req.body.email; //recebe o email

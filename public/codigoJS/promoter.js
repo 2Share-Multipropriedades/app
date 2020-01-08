@@ -150,7 +150,7 @@ $("#promoter_btn_registro").on("click", function (e) {
                                         localStorage.setItem('registro', resposta.registro);
                                         localStorage.setItem('crm', resposta.crm);
                                         localStorage.setItem('nome_promoter', resposta.nome_promoter);
-                                        window.location.href = '/promoter-cadastro'
+                                        window.location.href = '/promoter-menu'
                                         break;
                                 }
                             })
@@ -268,6 +268,10 @@ $("#sair").on("click", function (e) {
 })
 
 
+$('#voltar').on('click', function(e){
+    window.location.href = '/promoter-menu'
+})
+
 
 $("#enviar_SMS").on("click", function (e) {
     e.preventDefault();
@@ -287,6 +291,7 @@ $("#enviar_SMS").on("click", function (e) {
         //tirar os caracteres especiais do telefone
         var numero = telefone.substr(1, 2) + telefone.substr(5, 5) + telefone.substr(11, 4);
         //FIM tirar os caracteres especiais do telefone
+
 
         $.ajax({
             type: 'POST',
@@ -340,14 +345,15 @@ $("#enviar_SMS").on("click", function (e) {
                             })
                         },
                     }).done(function (resposta) {
-                        console.log(resposta)
                         if (resposta == '000 - Message Sent') {
                             Swal.fire({
                                 icon: 'success',
-                                html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div> <div class="col-sm-12" id="qrcode"></div>',
+                                html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div>' +
+                                    '<div class="col-sm-12" id="qrcode"></div>' +
+                                    '<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',%20Seja%20bem%20vindo(a)%20ao%20HRI!%20Por%20favor%20acesse%20o%20link%20abaixo%20para%20concluir%20seu%20cadastro:%0D%20https://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
-                                confirmButtonText: 'Ok',
+                                confirmButtonText: 'Próximo',
                             })
                             gerar_qrcode(localStorage.getItem('id_lead'))
                             $('#nome').val('');
@@ -366,9 +372,9 @@ $("#enviar_SMS").on("click", function (e) {
 
             }
         })
+
     }
 })
-
 
 
 /*Modelo de AJAX
