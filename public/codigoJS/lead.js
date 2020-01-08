@@ -1,5 +1,5 @@
 $('document').ready(function () {
-    $('#conjuge').val('1');
+    //$('#conjuge').val('1');
     $('#conjuge').hide();
     $('#conjuge').hide();
     $('#carregando').hide();
@@ -127,101 +127,113 @@ function trazer_lead() {
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
-    if (!validar_campos()) {
-        Swal.fire({
-            icon: 'warning',
-            text: 'Nenhum campo pode ficar vazio'
-        })
-    } else {
-        if ($("#confirmo").is(':checked')) {
-
-            $.ajax({
-                type: 'POST',
-                url: 'https://2share.bitrix24.com.br/rest/58/4icdwfadz1vow6hv/crm.contact.add',
-                data: {
-                    'fields[TYPE_ID]': 'CLIENT',
-                    'fields[SOURCE_ID]': '5',
-                    'fields[NAME]': $('#field-nome').val(),
-                    'fields[LAST_NAME]': '',
-                    'fields[PHONE][0][VALUE]': $('#telefone').val(),
-                    'fields[PHONE][0][VALUE_TYPE]': 'OTHER',
-                    'fields[PHONE][0][TYPE_ID]': 'PHONE',
-                    'fields[EMAIL][0][VALUE]': $('#field-email').val(),
-                    'fields[EMAIL][0][VALUE_TYPE]': 'OTHER',
-                    'fields[EMAIL][0][TYPE_ID]': 'EMAIL',
-                    'fields[UF_CRM_1561136312]': $('#field-cpf').val()
-                },
-                dataType: 'json',
-                contentType: 'application/x-www-form-urlencoded',
-
-            }).done(function (resposta) {
-
-                $.ajax({
-                    url: 'https://2share.bitrix24.com.br/rest/58/4icdwfadz1vow6hv/crm.deal.add',
-                    type: 'POST',
-                    beforeSend: function () {
-                        Swal.fire({
-                            title: 'Cadastrando...',
-                            text: 'Por favor aguarde',
-                            timerProgressBar: true,
-                            onBeforeOpen: () => {
-                                Swal.showLoading()
-                            }
-                        })
-                    },
-                    data: {
-                        'fields[CONTACT_ID]': resposta.result,
-                        'fields[TITLE]': $('#field-nome').val(),
-                        'fields[UF_CRM_1559237906]': $('#ID-TIME-VENDAS').val(),
-                        'fields[UF_CRM_1559221906859]': $('#NOME-DO-PARCEIRO').val(),
-                        'fields[UF_CRM_1575626649]': $('#ID-CRM-PROMOTORA').val(),
-                        'fields[UF_CRM_5D5C363161B5F]': $('#telefone').val(),
-                        'fields[UF_CRM_1559238324]': $('#field-nome').val(),
-                        'fields[UF_CRM_1559222048236]': $('#NOME_PROMOTORA').val(), //nome da promotora
-                        'fields[LAST_NAME]': 'xxx',
-                        'fields[UF_CRM_5D0D23AC4DE21]': $('#field-cpf').val(),
-                        'fields[UF_CRM_1559238354]': $('#field-idade').val(),
-                        'fields[UF_CRM_1559572368]': $('#field-profissao').val(),
-                        'fields[UF_CRM_5CEFC4776D26B]': $('#field-estado-civil').val(),
-                        'fields[UF_CRM_1559220378]': $('#conjuge').val(),
-                        'fields[UF_CRM_5CEFC4777B306]': $('#field-renda').val(),
-                        'fields[UF_CRM_1559221860983]': $('#field-ultima-viagem').val(),
-                        'fields[UF_CRM_1577122100]': $('#field-ano_ultima_viagem').val(),
-                        'fields[UF_CRM_1577121920]': $('#field-viagem-dos-sonhos').val(),
-                        'fields[SOURCE_ID]': '6',
-                        'fields[CATEGORY_ID]': '12',
-                        'fields[OPPORTUNITY]': 65000,
-                    }
-                }).done(function (resposta) {
-                    var url01 = window.location.href;
-                    var url02 = url01.split('/');
-                    var url03 = url02[4];
-                    var codigo = atob(url03)
-
-                    $.ajax({
-                        url: '/lead/confirmar-cadastro',
-                        type: 'POST',
-                        data: {
-                            id: codigo
-                        },
-                        dataType: 'json',
-                        contentType: 'application/x-www-form-urlencoded',
-
-                    }).done(function (resposta) {
-                        if (resposta.status == 'ok') {
-                            window.location.href = '\\agradecimento\\positivo'
-                        }
-                    })
-
-                })
-            })
-
-        } else {
+    
+    switch (validar_campos()) {
+        case 'erro1':
             Swal.fire({
                 icon: 'warning',
-                text: 'Para concluir o seu cadastro, você precisa concordar com os termos da promoção.',
+                text: 'Nenhum campo pode ficar vazio'
             })
-        }
+            break;
+
+        case 'erro2':
+            Swal.fire({
+                icon: 'warning',
+                text: 'Nenhum campo pode ficar vazio'
+            })
+            break;
+        case 'sucesso':
+            if ($("#confirmo").is(':checked')) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://2share.bitrix24.com.br/rest/58/4icdwfadz1vow6hv/crm.contact.add',
+                    data: {
+                        'fields[TYPE_ID]': 'CLIENT',
+                        'fields[SOURCE_ID]': '5',
+                        'fields[NAME]': $('#field-nome').val(),
+                        'fields[LAST_NAME]': '',
+                        'fields[PHONE][0][VALUE]': $('#telefone').val(),
+                        'fields[PHONE][0][VALUE_TYPE]': 'OTHER',
+                        'fields[PHONE][0][TYPE_ID]': 'PHONE',
+                        'fields[EMAIL][0][VALUE]': $('#field-email').val(),
+                        'fields[EMAIL][0][VALUE_TYPE]': 'OTHER',
+                        'fields[EMAIL][0][TYPE_ID]': 'EMAIL',
+                        'fields[UF_CRM_1561136312]': $('#field-cpf').val()
+                    },
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded',
+
+                }).done(function (resposta) {
+
+                    $.ajax({
+                        url: 'https://2share.bitrix24.com.br/rest/58/4icdwfadz1vow6hv/crm.deal.add',
+                        type: 'POST',
+                        beforeSend: function () {
+                            Swal.fire({
+                                title: 'Cadastrando...',
+                                text: 'Por favor aguarde',
+                                timerProgressBar: true,
+                                onBeforeOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            })
+                        },
+                        data: {
+                            'fields[CONTACT_ID]': resposta.result,
+                            'fields[TITLE]': $('#field-nome').val(),
+                            'fields[UF_CRM_1559237906]': $('#ID-TIME-VENDAS').val(),
+                            'fields[UF_CRM_1559221906859]': $('#NOME-DO-PARCEIRO').val(),
+                            'fields[UF_CRM_1575626649]': $('#ID-CRM-PROMOTORA').val(),
+                            //'fields[UF_CRM_5D5C363161B5F]': $('#telefone').val(),
+                            'fields[UF_CRM_1559238324]': $('#field-nome').val(),
+                            'fields[UF_CRM_1559222048236]': $('#NOME_PROMOTORA').val(), //nome da promotora
+                            'fields[LAST_NAME]': 'xxx',
+                            'fields[UF_CRM_5D0D23AC4DE21]': $('#field-cpf').val(),
+                            'fields[UF_CRM_1559238354]': $('#field-idade').val(),
+                            'fields[UF_CRM_1559572368]': $('#field-profissao').val(),
+                            'fields[UF_CRM_5CEFC4776D26B]': $('#field-estado-civil').val(),
+                            'fields[UF_CRM_1559220378]': $('#conjuge').val(),
+                            'fields[UF_CRM_5CEFC4777B306]': $('#field-renda').val(),
+                            'fields[UF_CRM_1559221860983]': $('#field-ultima-viagem').val(),
+                            'fields[UF_CRM_1577122100]': $('#field-ano_ultima_viagem').val(),
+                            'fields[UF_CRM_1577121920]': $('#field-viagem-dos-sonhos').val(),
+                            'fields[SOURCE_ID]': '6',
+                            'fields[CATEGORY_ID]': '12',
+                            'fields[OPPORTUNITY]': 65000,
+                        }
+                    }).done(function (resposta) {
+                        var url01 = window.location.href;
+                        var url02 = url01.split('/');
+                        var url03 = url02[4];
+                        var codigo = atob(url03)
+
+                        $.ajax({
+                            url: '/lead/confirmar-cadastro',
+                            type: 'POST',
+                            data: {
+                                id: codigo
+                            },
+                            dataType: 'json',
+                            contentType: 'application/x-www-form-urlencoded',
+
+                        }).done(function (resposta) {
+                            if (resposta.status == 'ok') {
+                                window.location.href = '\\agradecimento\\positivo'
+                            }
+                        })
+
+                    })
+                })
+
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    text: 'Para concluir o seu cadastro, você precisa concordar com os termos da promoção.',
+                })
+            }
+            break;
+
     }
 })
 
@@ -321,22 +333,12 @@ function validar_campos() {
     var email = $('#field-email').val();
     var idade = $('#field-idade').val();
     var profissao = $('#field-profissao').val();
-    var estado_civil = $('#field-estado_civil').val();
+    var estado_civil = $('#field-estado-civil').val();
     //var renda = $('#field-renda').val();
     var ultima_viagem = $('#field-ultima_viagem').val();
     var ano_ultima_viagem = $('#field-ano_ultima_viagem').val();
     var viagem_dos_sonhos = $('#field-viagem_dos_sonhos').val();
     var conjuge = $('#conjuge').val();
-    //field-nome
-    //field-cpf
-    //field-email
-    //field-idade
-    //field-profissao
-    //field-estado-civil
-    //field-renda
-    //field-ultima-viagem
-    //field-ano_ultima_viagem
-    //field-viagem-dos-sonhos
     if (
         (nome == '') ||
         //(cpf == '') ||
@@ -349,11 +351,13 @@ function validar_campos() {
         (ano_ultima_viagem == '') ||
         (viagem_dos_sonhos == '')
     ) {
-        return false
-    } else if (conjuge != 1) {
-        return false
+        return 'erro1'
+    } else if ((conjuge == "") && (estado_civil == '4886')) {
+        return 'erro2'
+    } else if ((conjuge == "") && (estado_civil == '1378')) {
+        return 'erro3'
     } else {
-        return true
+        return 'sucesso'
     }
 }
 
@@ -441,9 +445,8 @@ function liberar_conjuge() {
         $('#conjuge').val('');
         $('#conjuge').show();
     } else {
-        $('#conjuge').val('1');
+        //$('#conjuge').val('1');
         $('#conjuge').hide();
-
     }
 
 }
