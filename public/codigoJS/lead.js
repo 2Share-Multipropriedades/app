@@ -175,6 +175,7 @@ $("#cadastrar_lead").on("click", function (e) {
                         'fields[UF_CRM_1559237906]': $('#ID-TIME-VENDAS').val(),
                         'fields[UF_CRM_1559221906859]': $('#NOME-DO-PARCEIRO').val(),
                         'fields[UF_CRM_1575626649]': $('#ID-CRM-PROMOTORA').val(),
+                        'fields[UF_CRM_5D5C363161B5F]': $('#telefone').val(),
                         'fields[UF_CRM_1559238324]': $('#field-nome').val(),
                         'fields[UF_CRM_1559222048236]': $('#NOME_PROMOTORA').val(), //nome da promotora
                         'fields[LAST_NAME]': 'xxx',
