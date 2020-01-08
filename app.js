@@ -50,8 +50,8 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
-app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
+//app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
+//app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
 
 
 
@@ -338,25 +338,32 @@ app.post('/salvar-lead', function (req, res) {
     var nome = req.body.nome; //recebe o nome do lead
     var celular = req.body.numero_celular; //recebe o numero d etelefone do lead
 
-    //Criar resgistro
-    lead.create({
-        id_parceiro: id_parceiro,
-        id_promoter: id_promoter,
-        nome: nome,
-        celular: celular,
-        promoter_crm: req.body.promoter_crm,
-        promoter_nome: req.body.nome_promoter,
-        status: 'Não Cadastrado'
-    }).then(lead => {
-        httpmsg.sendJSON(req, res, {
-            status: 'Lead_OK',
-            id_lead: lead.id
-        })
-    }).catch(function (erro) {
+    if (celular.length == 11) {
+        //Criar resgistro
+        lead.create({
+            id_parceiro: id_parceiro,
+            id_promoter: id_promoter,
+            nome: nome,
+            celular: celular,
+            promoter_crm: req.body.promoter_crm,
+            promoter_nome: req.body.nome_promoter,
+            status: 'Não Cadastrado'
+        }).then(lead => {
+            httpmsg.sendJSON(req, res, {
+                status: 'Lead_OK',
+                id_lead: lead.id
+            })
+        }).catch(function (erro) {
+            httpmsg.sendJSON(req, res, {
+                status: 'Erro_Lead'
+            })
+        });
+    } else {
         httpmsg.sendJSON(req, res, {
             status: 'Erro_Lead'
         })
-    });
+    }
+
 })
 
 app.post('/lead/confirmar-cadastro', function (req, res) {
