@@ -349,8 +349,8 @@ $("#enviar_SMS").on("click", function (e) {
                             Swal.fire({
                                 icon: 'success',
                                 html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div>' +
-                                    '<div class="col-sm-12" id="qrcode"></div>' +
-                                    '<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',%20Seja%20bem%20vindo(a)%20ao%20HRI!%20Por%20favor%20acesse%20o%20link%20abaixo%20para%20concluir%20seu%20cadastro:%0D%20https://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
+                                    '<div class="col-sm-12" id="qrcode"></div>',// +
+                                    //'<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',,%20acesse%20o%20link%20abaixo,%20complete%20seu%20cadastro.%20Viva%20uma%20grande%20experiencia%20com%20o%20Residence%20Club%20at%20the%20Hard%20Rock%20Hotel.%0D%0D%20%20http://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
                                 allowOutsideClick: false,
                                 allowEscapeKey: false,
                                 confirmButtonText: 'Próximo',
