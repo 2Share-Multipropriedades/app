@@ -50,8 +50,8 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-//app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
-//app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
+app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
+app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
 
 
 
