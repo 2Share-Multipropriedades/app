@@ -154,15 +154,20 @@ app.post('/carregar-meus-leads', function (req, res) {
         where: {
             id_promoter: req.body.id,
             status: 'Não Cadastrado'
-        }
+        },
+        order: [
+            ['id', req.body.ordem],
+        ]
     }).then(function (lead) {
         var leads = []
         lead.forEach(element => {
-            leads.push(element.id)
-            leads.push(element.nome)
-            leads.push(element.celular)
-            leads.push(element.status)
-        })
+            leads.push({
+                nome: element.nome,
+                telefone: element.celular,
+                status: element.status,
+                id: element.id
+            })
+        });
         httpmsg.sendJSON(req, res, {
             status: 'success',
             dados: leads
@@ -385,7 +390,11 @@ app.post('/lead/confirmar-cadastro', function (req, res) {
 })
 
 app.get('/carregar_estados', function (req, res) {
-    estado.findAll().then(function (estado) {
+    estado.findAll({
+        order: [
+            ['estado', 'ASC'],
+        ]
+    }).then(function (estado) {
         httpmsg.sendJSON(req, res, {
             estados: estado
         })
@@ -393,7 +402,11 @@ app.get('/carregar_estados', function (req, res) {
 })
 
 app.get('/carregar_cidades', function (req, res) {
-    cidade.findAll().then(function (cidade) {
+    cidade.findAll({
+        order: [
+            ['cidade', 'ASC'],
+        ]
+    }).then(function (cidade) {
         httpmsg.sendJSON(req, res, {
             cidades: cidade
         })
@@ -401,7 +414,14 @@ app.get('/carregar_cidades', function (req, res) {
 })
 
 app.get('/carregar_parceiros', function (req, res) {
-    parceiro.findAll().then(function (parceiro) {
+    parceiro.findAll({
+        order: [
+            ['nome', 'ASC'],
+        ],
+        where:{
+            status: 'Ativo'
+        }
+    }).then(function (parceiro) {
         httpmsg.sendJSON(req, res, {
             parceiros: parceiro
         })
