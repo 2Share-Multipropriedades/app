@@ -103,8 +103,21 @@ body {
     border-color: #009846;
 }
 
-.data{
-    font-size: small;
+.card {
+    background-color: #000000;
+    background-clip: border-box;
+    border: 1.5px solid rgb(205, 162, 73);
+    border-radius: .25rem;
+}
+
+.dado1{
+    color: #CDA249;
+}
+.dado2{
+    color: whitesmoke;
+}
+.dado3{
+    color: gray;
 }
 /*FIM Classe com o tema da VCI*/
 

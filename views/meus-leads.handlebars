@@ -5,19 +5,30 @@
 <!--FIM Titulo da Página-->
 
 <!--Menu-->
-<div class="col-sm-12">
-    <table class="table table-sm">
-        <thead class="text-white">
-            <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Reenviar</th>
-            </tr>
-        </thead>
-        <tbody class="text-white">
-            
-        </tbody>
-    </table>
+<div class="col-sm-12 text-white mb-3">
+    <div class="col-12">
+        <label for="">Filtro</label>
+    </div>
+
+    <form>
+
+        <div class="form-group col-12">
+            <select class="form-control" id="ordem">
+                <option>Ordem</option>
+                <option value="ASC">Crescente</option>
+                <option value="DESC">Decrescente</option>
+            </select>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-claro-VCI text-white btn-block" id="filtrar">Filtrar</button>
+        </div>
+
+    </form>
 </div>
-<!--FIM menu-->
+<!--FIM Menu-->
+
+<!--Lista-->
+<div class="col-sm-12" id="caixa">
+</div>
+<!--FIM Lista-->

@@ -181,6 +181,20 @@ $('#voltar').on('click', function (e) {
 $("#enviar_SMS").on("click", function (e) {
     e.preventDefault();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var nome = $('#nome').val();
     var telefone = $('#celular').val();
 
@@ -231,58 +245,61 @@ $("#enviar_SMS").on("click", function (e) {
                     case 'Lead_OK':
                         var codigo_lead = btoa(resposta.id_lead)
                         localStorage.setItem('id_lead', codigo_lead)
-                        //Mensagem
-                        var mensagem = 'Acesse o link abaixo, complete seu cadastro. Viva uma grande experiencia com o Residence Club at the Hard Rock Hotel. http://lead.vcisa.com/lead/' + codigo_lead
 
-                        //FIM Mensagem
+                        if ($('#decisao').val() == 'preencher') {
+                            window.location.href = '/lead/' + codigo_lead
+                        } else {
+                            //Mensagem
+                            var mensagem = 'Acesse o link abaixo, complete seu cadastro. Viva uma grande experiencia com o Residence Club at the Hard Rock Hotel. http://lead.vcisa.com/lead/' + codigo_lead
 
-                        //URL para envio de SMS
-                        var url_SMS = 'https://api-http.zenvia.com/GatewayIntegration/msgSms.do?dispatch=send&account=venture.smsonline&code=3Xyy5vhKh2&to=55' + numero + '&msg=' + mensagem
-                        //FIM URL para envio de SMS
+                            //FIM Mensagem
 
-                        $.ajax({
-                            type: 'GET',
-                            url: url_SMS,
-                            beforeSend: function () {
-                                Swal.fire({
-                                    title: 'Enviando...',
-                                    text: 'Por favor aguarde',
-                                    timerProgressBar: true,
-                                    onBeforeOpen: () => {
-                                        Swal.showLoading()
-                                    }
-                                })
-                            },
-                        }).done(function (resposta) {
-                            if (resposta == '000 - Message Sent') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div>' +
-                                        '<div class="col-sm-12" id="qrcode"></div>',// +
-                                    //'<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',,%20acesse%20o%20link%20abaixo,%20complete%20seu%20cadastro.%20Viva%20uma%20grande%20experiencia%20com%20o%20Residence%20Club%20at%20the%20Hard%20Rock%20Hotel.%0D%0D%20%20http://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
-                                    allowOutsideClick: false,
-                                    allowEscapeKey: false,
-                                    confirmButtonText: 'Próximo',
-                                })
-                                gerar_qrcode(localStorage.getItem('id_lead'))
-                                $('#nome').val('');
-                                $('#celular').val('');
-                                document.getElementById("enviar_SMS").disabled = false;
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    text: 'Número de celular incorreto ou incompleto',
-                                    allowOutsideClick: false,
-                                    allowEscapeKey: false,
-                                    confirmButtonText: 'Ok',
-                                })
-                            }
-                        })
+                            //URL para envio de SMS
+                            var url_SMS = 'https://api-http.zenvia.com/GatewayIntegration/msgSms.do?dispatch=send&account=venture.smsonline&code=3Xyy5vhKh2&to=55' + numero + '&msg=' + mensagem
+                            //FIM URL para envio de SMS
+
+                            $.ajax({
+                                type: 'GET',
+                                url: url_SMS,
+                                beforeSend: function () {
+                                    Swal.fire({
+                                        title: 'Enviando...',
+                                        text: 'Por favor aguarde',
+                                        timerProgressBar: true,
+                                        onBeforeOpen: () => {
+                                            Swal.showLoading()
+                                        }
+                                    })
+                                },
+                            }).done(function (resposta) {
+                                if (resposta == '000 - Message Sent') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        html: '<div class="col-sm-12 mb-3">Mensagem enviada com sucesso</div>' +
+                                            '<div class="col-sm-12" id="qrcode"></div>',// +
+                                        //'<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',,%20acesse%20o%20link%20abaixo,%20complete%20seu%20cadastro.%20Viva%20uma%20grande%20experiencia%20com%20o%20Residence%20Club%20at%20the%20Hard%20Rock%20Hotel.%0D%0D%20%20http://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                        confirmButtonText: 'Próximo',
+                                    })
+                                    gerar_qrcode(localStorage.getItem('id_lead'))
+                                    $('#nome').val('');
+                                    $('#celular').val('');
+                                    document.getElementById("enviar_SMS").disabled = false;
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        text: 'Número de celular incorreto ou incompleto',
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                        confirmButtonText: 'Ok',
+                                    })
+                                }
+                            })
+                        }
                         break;
-
                 }
             })
-
         }
     }
 })

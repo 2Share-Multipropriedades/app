@@ -6,6 +6,13 @@ $('document').ready(function () {
     $('.windows8').hide();
     //$('.carregado').show();
 
+    if(localStorage.getItem('promoter') == null){
+        setTimeout(function () {
+            $('#splash').modal('hide');
+            $('.carregado').show();
+        }, 3000); // 3000 = 3 segundos
+    }
+
     //Macara CPF
     $('#field-cpf').mask('000.000.000-00');
     //FIM Macara CPF
@@ -14,11 +21,7 @@ $('document').ready(function () {
     trazer_lead();
     //FIM Procura o Lead
 
-    setTimeout(function () {
-        $('#splash').modal('hide');
-        $('.carregado').show();
-    }, 3000); // 3000 = 3 segundos
-
+    
 })
 
 function trazer_lead() {
@@ -79,7 +82,13 @@ function trazer_lead() {
                     break;
 
                 case 'Lead_OK':
-                    $('#splash').modal('show')
+                    if(localStorage.getItem('promoter') != null){
+                        $('#splash').modal('hide');
+                        $('.carregado').show();
+                        
+                    }else{
+                        $('#splash').modal('show')
+                    }
                     $('#field-nome').val(resposta.nome);
                     $('#telefone').val(resposta.celular);
                     $('#ID-CRM-PROMOTORA').val(resposta.promoter_crm);
@@ -219,7 +228,11 @@ $("#cadastrar_lead").on("click", function (e) {
 
                         }).done(function (resposta) {
                             if (resposta.status == 'ok') {
-                                window.location.href = '\\agradecimento\\positivo'
+                                if(localStorage.getItem('promoter') != null){
+                                    window.location.href = '/promoter-cadastro'
+                                }else{
+                                    window.location.href = '\\agradecimento\\positivo'
+                                }
                             }
                         })
 
@@ -335,9 +348,9 @@ function validar_campos() {
     var profissao = $('#field-profissao').val();
     var estado_civil = $('#field-estado-civil').val();
     //var renda = $('#field-renda').val();
-    var ultima_viagem = $('#field-ultima_viagem').val();
+    var ultima_viagem = $('#field-ultima-viagem').val();
     var ano_ultima_viagem = $('#field-ano_ultima_viagem').val();
-    var viagem_dos_sonhos = $('#field-viagem_dos_sonhos').val();
+    var viagem_dos_sonhos = $('#field-viagem-dos-sonhos').val();
     var conjuge = $('#conjuge').val();
     if (
         (nome == '') ||

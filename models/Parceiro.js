@@ -6,6 +6,9 @@ const Parceiro = db.sequelize.define('promo_parceiro', {
     nome: {
         type: db.Sequelize.STRING,
     },
+    status:{
+        type: db.Sequelize.STRING,
+    },
     id_cidade: {
         type: db.Sequelize.INTEGER,
         references: {         
