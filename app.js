@@ -118,7 +118,7 @@ app.get('/promoter-menu', function (req, res) {
 app.get('/lead/*', function (req, res) {
     res.render('lead_cadastro', {
         title: 'FAÇA JA SEU CADASTRO',
-        script: '<script src="../../codigoJS/lead.js"></script>',
+        script: '<script src="../../codigoJS/lead.js"></script><script src="../../codigoJS/quebra_form.js"></script>',
         splash: '<div class="modal fade" id="splash" tabindex="-1" role="dialog" aria-hidden="true" onclick="aparecer_form()">' +
             '<div class="modal-dialog modal-full" role="document">' +
             '<div class="modal-content p-0 m-0">' +
@@ -143,6 +143,14 @@ app.get('/agradecimento/negativo', function (req, res) {
         title: 'OBRIGADA',
         script: '<script src="../../codigoJS/agradecimento.js"></script>'
     })
+})
+
+app.get('/teste', function(req, res){
+    res.render('teste', {
+        title: 'teste',
+        script: '<script src="../../codigoJS/teste.js"></script>'
+    })
+    
 })
 //FIM Configuração das rotas
 
