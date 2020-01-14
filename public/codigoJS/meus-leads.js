@@ -10,7 +10,7 @@ $(document).ready(function () {
         url: '/carregar-meus-leads',
         data: {
             id: localStorage.getItem('promoter'),
-            ordem: 'ASC',
+            ordem: 'DESC',
         },
         dataType: 'json',
         contentType: 'application/x-www-form-urlencoded',
@@ -88,43 +88,50 @@ $('#voltar').on('click', function (e) {
 
 $('#filtrar').on('click', function (e) {
     e.preventDefault()
-    document.getElementById("caixa").innerHTML = "";
-
-    $.ajax({
-        type: 'POST',
-        url: '/carregar-meus-leads',
-        data: {
-            id: localStorage.getItem('promoter'),
-            ordem: $("#ordem").val(),
-        },
-        dataType: 'json',
-        contentType: 'application/x-www-form-urlencoded',
-
-    }).done(function (resposta) {
-        resposta.dados.forEach(element => {
-            var teste = element.telefone
-            var teste2 = teste.split('')
-            var telefone_mask = '(' + teste2[0] + teste2[1] + ')' + ' ' + teste2[2] + teste2[3] + teste2[4] + teste2[5] + teste2[6] + '-' + teste2[7] + teste2[8] + teste2[9] + teste2[10]
 
 
-            var card =
-                '<div class="card my-3">' +
-                '<div class="card-body">' +
-                '<div class="col-8 float-left">' +
-                '<h5 class="card-title dado1">' + element.nome + '</h5>' +
-                '<h6 class="card-subtitle mb-2 dado2">' + element.status + '</h6>' +
-                '<p class="dado3">' + telefone_mask + '</p>' +
-                '</div>' +
-                '<div class="col-4 text-center float-left">' +
-                '<a class="btn btn-claro-VCI text-white btn-block sms" onclick="sms(' + element.telefone + ',' + element.id + ')">SMS</a>' +
-                '</div>' +
+    if ($("#ordem").val() == '') {
+        Swal.fire({
+            icon: 'warning',
+            text: 'Escolha uma forma de ordenação'
+        })
+    } else {
+        document.getElementById("caixa").innerHTML = "";
+
+        $.ajax({
+            type: 'POST',
+            url: '/carregar-meus-leads',
+            data: {
+                id: localStorage.getItem('promoter'),
+                ordem: $("#ordem").val(),
+            },
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+
+        }).done(function (resposta) {
+            resposta.dados.forEach(element => {
+                var teste = element.telefone
+                var teste2 = teste.split('')
+                var telefone_mask = '(' + teste2[0] + teste2[1] + ')' + ' ' + teste2[2] + teste2[3] + teste2[4] + teste2[5] + teste2[6] + '-' + teste2[7] + teste2[8] + teste2[9] + teste2[10]
+
+
+                var card =
+                    '<div class="card my-3">' +
+                    '<div class="card-body">' +
+                    '<div class="col-8 float-left">' +
+                    '<h5 class="card-title dado1">' + element.nome + '</h5>' +
+                    '<h6 class="card-subtitle mb-2 dado2">' + element.status + '</h6>' +
+                    '<p class="dado3">' + telefone_mask + '</p>' +
+                    '</div>' +
+                    '<div class="col-4 text-center float-left">' +
+                    '<a class="btn btn-claro-VCI text-white btn-block sms" onclick="sms(' + element.telefone + ',' + element.id + ')">SMS</a>' +
+                    '</div>' +
+                    '</div>'
                 '</div>'
-            '</div>'
-            $('#caixa').append(card)
-
-        });
-
-    })
+                $('#caixa').append(card)
+            });
+        })
+    }
 })
 
 

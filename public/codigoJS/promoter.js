@@ -180,23 +180,11 @@ $('#voltar').on('click', function (e) {
 
 $("#enviar_SMS").on("click", function (e) {
     e.preventDefault();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    document.getElementById("enviar_SMS").disabled = true;
     var nome = $('#nome').val();
     var telefone = $('#celular').val();
+    var sobrenome = nome.split(' ')
+    sobrenome = sobrenome[1]
 
     if (nome == "" || telefone == "") {
         Swal.fire({
@@ -206,7 +194,19 @@ $("#enviar_SMS").on("click", function (e) {
             allowEscapeKey: false,
             confirmButtonText: 'Ok',
         })
-    } else {
+        document.getElementById("enviar_SMS").disabled = false;
+    } else if (sobrenome == undefined) {
+        Swal.fire({
+            icon: 'warning',
+            text: 'O lead deve ter um sobrenome',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            confirmButtonText: 'Ok',
+        })
+        document.getElementById("enviar_SMS").disabled = false;
+
+    }
+    else {
         var numero = telefone.substr(1, 2) + telefone.substr(5, 5) + telefone.substr(11, 4);
         if (!validar_numero_celular(numero)) {
             Swal.fire({
@@ -214,8 +214,6 @@ $("#enviar_SMS").on("click", function (e) {
                 text: 'Preencha o número de celular adequadamente'
             })
         } else {
-            document.getElementById("enviar_SMS").disabled = true;
-
             $.ajax({
                 type: 'POST',
                 url: '/salvar-lead',
@@ -384,3 +382,16 @@ function validar_numero_celular(numero) {
         return false
     }
 }
+
+
+$('#teste').on('click', function (e) {
+    e.preventDefault()
+    var nome = $('#nome').val()
+    //console.log(nome)
+    var teste1 = nome.split(' ')
+    //console.log(teste1)
+    //console.log(teste1[1])
+
+
+
+})

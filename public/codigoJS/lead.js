@@ -6,7 +6,7 @@ $('document').ready(function () {
     $('.windows8').hide();
     //$('.carregado').show();
 
-    if(localStorage.getItem('promoter') == null){
+    if (localStorage.getItem('promoter') == null) {
         setTimeout(function () {
             $('#splash').modal('hide');
             $('.carregado').show();
@@ -21,7 +21,7 @@ $('document').ready(function () {
     trazer_lead();
     //FIM Procura o Lead
 
-    
+
 })
 
 function trazer_lead() {
@@ -82,11 +82,11 @@ function trazer_lead() {
                     break;
 
                 case 'Lead_OK':
-                    if(localStorage.getItem('promoter') != null){
+                    if (localStorage.getItem('promoter') != null) {
                         $('#splash').modal('hide');
                         $('.carregado').show();
-                        
-                    }else{
+
+                    } else {
                         $('#splash').modal('show')
                     }
                     $('#field-nome').val(resposta.nome);
@@ -136,7 +136,7 @@ function trazer_lead() {
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
-    
+
     switch (validar_campos()) {
         case 'erro1':
             Swal.fire({
@@ -144,11 +144,10 @@ $("#cadastrar_lead").on("click", function (e) {
                 text: 'Nenhum campo pode ficar vazio'
             })
             break;
-
         case 'erro2':
             Swal.fire({
                 icon: 'warning',
-                text: 'Nenhum campo pode ficar vazio'
+                text: 'O nome do cônjuge deve ter sobrenome'
             })
             break;
         case 'sucesso':
@@ -228,9 +227,9 @@ $("#cadastrar_lead").on("click", function (e) {
 
                         }).done(function (resposta) {
                             if (resposta.status == 'ok') {
-                                if(localStorage.getItem('promoter') != null){
+                                if (localStorage.getItem('promoter') != null) {
                                     window.location.href = '/promoter-cadastro'
-                                }else{
+                                } else {
                                     window.location.href = '\\agradecimento\\positivo'
                                 }
                             }
@@ -347,11 +346,15 @@ function validar_campos() {
     var idade = $('#field-idade').val();
     var profissao = $('#field-profissao').val();
     var estado_civil = $('#field-estado-civil').val();
-    //var renda = $('#field-renda').val();
+    var renda = $('#field-renda').val();
     var ultima_viagem = $('#field-ultima-viagem').val();
     var ano_ultima_viagem = $('#field-ano_ultima_viagem').val();
     var viagem_dos_sonhos = $('#field-viagem-dos-sonhos').val();
     var conjuge = $('#conjuge').val();
+
+    var conjuge = conjuge.split(' ')
+    conjuge = conjuge[1]
+
     if (
         (nome == '') ||
         //(cpf == '') ||
@@ -359,16 +362,18 @@ function validar_campos() {
         (idade == '') ||
         (profissao == '') ||
         (estado_civil == '') ||
-        //(renda == '') ||
+        (renda == '') ||
         (ultima_viagem == '') ||
         (ano_ultima_viagem == '') ||
         (viagem_dos_sonhos == '')
     ) {
         return 'erro1'
     } else if ((conjuge == "") && (estado_civil == '4886')) {
-        return 'erro2'
+        return 'erro1'
     } else if ((conjuge == "") && (estado_civil == '1378')) {
-        return 'erro3'
+        return 'erro1'
+    } else if (conjuge == undefined) {
+        return 'erro2'
     } else {
         return 'sucesso'
     }
