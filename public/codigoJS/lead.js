@@ -336,7 +336,16 @@ function validar_cpf() {
 
 }
 
+function validar_nome_conjuge(nome) {
+    var parte1 = nome.trim()
+    var parte2 = parte1.split(' ')
 
+    if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+        return false
+    } else {
+        return true
+    }
+}
 
 function validar_campos() {
     //pegar dados dos inputs
@@ -352,8 +361,11 @@ function validar_campos() {
     var viagem_dos_sonhos = $('#field-viagem-dos-sonhos').val();
     var conjuge = $('#conjuge').val();
 
-    var conjuge = conjuge.split(' ')
-    conjuge = conjuge[1]
+    var parte1 = conjuge.trim()
+    var parte2 = conjuge.split(' ')
+
+
+
 
     if (
         (nome == '') ||
@@ -372,7 +384,7 @@ function validar_campos() {
         return 'erro1'
     } else if ((conjuge == "") && (estado_civil == '1378')) {
         return 'erro1'
-    } else if (conjuge == undefined) {
+    } else if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
         return 'erro2'
     } else {
         return 'sucesso'

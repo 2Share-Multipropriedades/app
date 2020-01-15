@@ -178,13 +178,22 @@ $('#voltar').on('click', function (e) {
 })
 
 
+function validar_nome(nome) {
+    var parte1 = nome.trim()
+    var parte2 = parte1.split(' ')
+
+    if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+        return false
+    } else {
+        return true
+    }
+}
+
 $("#enviar_SMS").on("click", function (e) {
     e.preventDefault();
-    document.getElementById("enviar_SMS").disabled = true;
+    //document.getElementById("enviar_SMS").disabled = true;
     var nome = $('#nome').val();
     var telefone = $('#celular').val();
-    var sobrenome = nome.split(' ')
-    sobrenome = sobrenome[1]
 
     if (nome == "" || telefone == "") {
         Swal.fire({
@@ -195,7 +204,7 @@ $("#enviar_SMS").on("click", function (e) {
             confirmButtonText: 'Ok',
         })
         document.getElementById("enviar_SMS").disabled = false;
-    } else if (sobrenome == undefined) {
+    } else if (!validar_nome(nome)) {
         Swal.fire({
             icon: 'warning',
             text: 'O lead deve ter um sobrenome',
@@ -204,7 +213,6 @@ $("#enviar_SMS").on("click", function (e) {
             confirmButtonText: 'Ok',
         })
         document.getElementById("enviar_SMS").disabled = false;
-
     }
     else {
         var numero = telefone.substr(1, 2) + telefone.substr(5, 5) + telefone.substr(11, 4);
@@ -383,15 +391,3 @@ function validar_numero_celular(numero) {
     }
 }
 
-
-$('#teste').on('click', function (e) {
-    e.preventDefault()
-    var nome = $('#nome').val()
-    //console.log(nome)
-    var teste1 = nome.split(' ')
-    //console.log(teste1)
-    //console.log(teste1[1])
-
-
-
-})
