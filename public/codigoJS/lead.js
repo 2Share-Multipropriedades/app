@@ -136,7 +136,7 @@ function trazer_lead() {
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
-
+    console.log()
     switch (validar_campos()) {
         case 'erro1':
             Swal.fire({
@@ -150,7 +150,7 @@ $("#cadastrar_lead").on("click", function (e) {
                 text: 'O nome do cônjuge deve ter sobrenome'
             })
             break;
-        case 'sucesso':
+        default:
             if ($("#confirmo").is(':checked')) {
 
                 $.ajax({
@@ -359,13 +359,10 @@ function validar_campos() {
     var ultima_viagem = $('#field-ultima-viagem').val();
     var ano_ultima_viagem = $('#field-ano_ultima_viagem').val();
     var viagem_dos_sonhos = $('#field-viagem-dos-sonhos').val();
+
     var conjuge = $('#conjuge').val();
-
     var parte1 = conjuge.trim()
-    var parte2 = conjuge.split(' ')
-
-
-
+    var parte2 = parte1.split(' ')
 
     if (
         (nome == '') ||
@@ -380,15 +377,29 @@ function validar_campos() {
         (viagem_dos_sonhos == '')
     ) {
         return 'erro1'
-    } else if ((conjuge == "") && (estado_civil == '4886')) {
-        return 'erro1'
-    } else if ((conjuge == "") && (estado_civil == '1378')) {
-        return 'erro1'
-    } else if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
-        return 'erro2'
     } else {
-        return 'sucesso'
+        switch (estado_civil) {
+            case '1378':
+                var conjuge = $('#conjuge').val();
+                var parte1 = conjuge.trim()
+                var parte2 = parte1.split(' ')
+                if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+                    return 'erro2'
+                }
+                break;
+
+            case '4886':
+                var conjuge = $('#conjuge').val();
+                var parte1 = conjuge.trim()
+                var parte2 = parte1.split(' ')
+                if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+                    return 'erro2'
+                }
+                break;
+        }
     }
+
+
 }
 
 
