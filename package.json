@@ -1,6 +1,6 @@
 {
-  "name": "Captação de Leads através do cupom digital",
-  "version": "1.0.10",
+  "name": "captacao_leads_cupom_digital",
+  "version": "1.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {
