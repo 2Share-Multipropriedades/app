@@ -144,16 +144,17 @@ $("#cadastrar_lead").on("click", function (e) {
                 icon: 'warning',
                 text: 'Nenhum campo pode ficar vazio'
             })
+            document.getElementById("cadastrar_lead").disabled = false;
             break;
         case 'erro2':
             Swal.fire({
                 icon: 'warning',
                 text: 'O nome do cônjuge deve ter sobrenome'
             })
+            document.getElementById("cadastrar_lead").disabled = false;
             break;
         default:
             if ($("#confirmo").is(':checked')) {
-
                 $.ajax({
                     type: 'POST',
                     url: 'https://2share.bitrix24.com.br/rest/58/4icdwfadz1vow6hv/crm.contact.add',
@@ -244,6 +245,7 @@ $("#cadastrar_lead").on("click", function (e) {
                     icon: 'warning',
                     text: 'Para concluir o seu cadastro, você precisa concordar com os termos da promoção.',
                 })
+                document.getElementById("cadastrar_lead").disabled = false;
             }
             break;
 
