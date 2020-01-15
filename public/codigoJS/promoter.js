@@ -191,7 +191,7 @@ function validar_nome(nome) {
 
 $("#enviar_SMS").on("click", function (e) {
     e.preventDefault();
-    //document.getElementById("enviar_SMS").disabled = true;
+    document.getElementById("enviar_SMS").disabled = true;
     var nome = $('#nome').val();
     var telefone = $('#celular').val();
 

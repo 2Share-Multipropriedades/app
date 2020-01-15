@@ -136,6 +136,7 @@ function trazer_lead() {
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
+    document.getElementById("cadastrar_lead").disabled = true;
     console.log()
     switch (validar_campos()) {
         case 'erro1':
