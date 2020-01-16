@@ -182,7 +182,7 @@ function validar_nome(nome) {
     var parte1 = nome.trim()
     var parte2 = parte1.split(' ')
 
-    if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+    if ((parte2.length < 2) || (parte1.length < 7)) {
         return false
     } else {
         return true
@@ -246,6 +246,7 @@ $("#enviar_SMS").on("click", function (e) {
                             allowEscapeKey: false,
                             confirmButtonText: 'Ok',
                         })
+                        document.getElementById("enviar_SMS").disabled = false;
                         break;
 
                     case 'Lead_OK':

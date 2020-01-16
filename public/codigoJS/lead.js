@@ -386,7 +386,7 @@ function validar_campos() {
                 var conjuge = $('#conjuge').val();
                 var parte1 = conjuge.trim()
                 var parte2 = parte1.split(' ')
-                if ((parte2.length < 2) || (parte2[0].length < 3) || (parte2[1].length < 3)) {
+                if ((parte2.length < 2) || (parte1.length < 7)) {
                     return 'erro2'
                 }
                 break;
