@@ -50,8 +50,8 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-//app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
-//app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
+app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
+app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
 
 
 
@@ -458,5 +458,5 @@ app.get('/carregar_parceiros', function (req, res) {
 })
 //FIM Rotas de REQUISIÇÃO
 
-app.listen(8091)
-//app.listen(81, '192.168.174.12')
+//app.listen(8091)
+app.listen(81, '192.168.174.12')
