@@ -6,9 +6,12 @@ const Cidade = db.sequelize.define('promo_cidade', {
     cidade: {
         type: db.Sequelize.STRING,
     },
+    ddd_cidade: {
+        type: db.Sequelize.STRING
+    },
     id_estado: {
         type: db.Sequelize.INTEGER,
-        references: {         
+        references: {
             model: 'promo_estados',
             key: 'id'
         }

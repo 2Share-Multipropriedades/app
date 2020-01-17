@@ -7,30 +7,32 @@
 <!--Formulário de cadastro completo do lead-->
 <div class="col-sm">
 
+  <!--Pessoal-->
   <div id="parte1">
+
+    <div class="col-sm">
+      <h5 class="text-white">Informações pessoais</h5>
+    </div>
+    
     <div class="form-group col-sm">
       <input aria-label="Nome" class="form-control name" placeholder="Nome" type="text" name="fields[NAME]"
         id="field-nome" required="required" aria-required="true">
     </div>
-
 
     <div class="form-group col-sm">
       <input class="form-control cpf" type="tel" name="fields[UF_CRM_5D0D23AC4DE21]" id="field-cpf"
         placeholder="CPF: 99999999999" required="required" aria-required="true" onblur="validar_cpf()">
     </div>
 
-
     <div class="form-group col-sm">
       <input class="form-control email" type="email" name="fields[EMAIL][0][VALUE]" id="field-email"
         placeholder="E-mail" onblur="validar_email()">
     </div>
 
-
     <div class="form-group col-sm">
       <input class="form-control" type="tel" name="fields[UF_CRM_1559238354]" id="field-idade" placeholder="Idade"
         required="required" aria-required="true" min="20" max="80">
     </div>
-
 
     <div class="form-group col-sm">
       <input class="form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-profissao"
@@ -42,7 +44,13 @@
     </div>
   </div>
 
+  <!--Familia-->
   <div id="parte2">
+
+    <div class="col-sm">
+      <h5 class="text-white">Informações familiares</h5>
+    </div>
+
     <div class="form-group col-sm">
       <select class="form-control estado-civil" name="fields[UF_CRM_5CEFC4776D26B]" id="field-estado-civil"
         required="required" aria-required="true" onchange="liberar_conjuge()">
@@ -73,13 +81,21 @@
         <option value="3576">Não informado</option>
       </select>
     </div>
+
     <div class="form-group col-sm">
       <button class="btn btn-claro-VCI" id="anterior2">Anterior</button>
       <button class="btn float-right btn-claro-VCI" id="proximo2">Próximo</button>
     </div>
+
   </div>
 
+  <!--Viagem-->
   <div id="parte3">
+
+    <div class="col-sm">
+      <h5 class="text-white">Informações de Viagem</h5>
+    </div>
+
     <div class="form-group col-sm">
       <input class="form-control" type="text" name="fields[UF_CRM_1559572368]" id="field-ultima-viagem"
         placeholder="Última viagem" required="required" aria-required="true">
@@ -102,7 +118,6 @@
         placeholder="Qual a viagem dos seus sonhos" required="required" aria-required="true">
     </div>
 
-
     <div class="form-group col-sm text-center">
       <label class="">
         <a id="termo_compromisso">Termos de Compromisso</a>
@@ -120,6 +135,59 @@
       <button class="btn float-right btn-claro-VCI" id="cadastrar_lead">Cadastrar</button>
     </div>
   </div>
+
+  <!--Caso não more na cidade de captação-->
+  <div id="parte4">
+
+    <div class="col-sm">
+      <h5 class="text-white">Informações de moradia</h5>
+    </div>
+
+    <div class="form-group col-sm">
+      <select class="form-control" name="" id="estado" required="required" aria-required="true">
+        <option value="">Estado</option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+        <option value="EX">Estrangeiro</option>
+      </select>
+    </div>
+
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" name="" id="cidade" placeholder="Cidade">
+    </div>
+
+    <div class="form-group col-sm">
+      <button class="btn btn-claro-VCI" id="anterior4">Anterior</button>
+      <button class="btn float-right btn-claro-VCI" id="proximo3">Próximo</button>
+    </div>
+
+  </div>
+
 
   <!--Carregar automático-->
   <input type="hidden" name="fields[fields[PHONE][0][VALUE]]" value="XXXXXX" id="telefone">

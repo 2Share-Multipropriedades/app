@@ -50,8 +50,8 @@ apiRoutes.use(function (req, res, next) {
 
 
 // Paginas que serão protegidas
-app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
-app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
+//app.use('/promoter-cadastro', apiRoutes); //<----------------------- DESCOMENTAR
+//app.use('/promoter-menu', apiRoutes); //<----------------------- DESCOMENTAR
 
 
 
@@ -145,12 +145,12 @@ app.get('/agradecimento/negativo', function (req, res) {
     })
 })
 
-app.get('/teste', function(req, res){
+app.get('/teste', function (req, res) {
     res.render('teste', {
         title: 'teste',
         script: '<script src="../../codigoJS/teste.js"></script>'
     })
-    
+
 })
 //FIM Configuração das rotas
 
@@ -379,6 +379,27 @@ app.post('/salvar-lead', function (req, res) {
 
 })
 
+app.post('/lead/editar', function (req, res) {
+
+    lead.update({
+        cidade: req.body.cidade,
+        estado: req.body.estado
+    },{
+        where:{
+            id: req.body.id
+        }
+    }).then(lead => {
+        httpmsg.sendJSON(req, res, {
+            status: 'success'
+        })
+    }).catch(function (erro) {
+        httpmsg.sendJSON(req, res, {
+            status: 'error'
+        })
+    });
+
+})
+
 app.post('/lead/confirmar-cadastro', function (req, res) {
     lead.update({
         status: 'Cadastrado'
@@ -426,7 +447,7 @@ app.get('/carregar_parceiros', function (req, res) {
         order: [
             ['nome', 'ASC'],
         ],
-        where:{
+        where: {
             status: 'Ativo'
         }
     }).then(function (parceiro) {
@@ -437,5 +458,5 @@ app.get('/carregar_parceiros', function (req, res) {
 })
 //FIM Rotas de REQUISIÇÃO
 
-//app.listen(8091)
-app.listen(81, '192.168.174.12')
+app.listen(8091)
+//app.listen(81, '192.168.174.12')

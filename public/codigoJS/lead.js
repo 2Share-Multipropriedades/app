@@ -20,14 +20,13 @@ $('document').ready(function () {
     //Procura o Lead
     trazer_lead();
     //FIM Procura o Lead
-
-
 })
 
 function trazer_lead() {
     var url01 = window.location.href;
     var url02 = url01.split('/');
     var url03 = url02[4];
+
     if (url03 == '') {
         Swal.fire({
             icon: 'error',
@@ -57,9 +56,7 @@ function trazer_lead() {
             },
             dataType: 'json',
             contentType: 'application/x-www-form-urlencoded',
-
         }).done(function (resposta) {
-
             switch (resposta.status) {
                 case 'Erro_Lead':
                     Swal.fire({
@@ -85,15 +82,14 @@ function trazer_lead() {
                     if (localStorage.getItem('promoter') != null) {
                         $('#splash').modal('hide');
                         $('.carregado').show();
-
                     } else {
                         $('#splash').modal('show')
                     }
+
                     $('#field-nome').val(resposta.nome);
                     $('#telefone').val(resposta.celular);
                     $('#ID-CRM-PROMOTORA').val(resposta.promoter_crm);
                     $('#NOME_PROMOTORA').val(resposta.promoter_nome);
-
 
                     $.ajax({
                         type: 'POST',
@@ -123,21 +119,16 @@ function trazer_lead() {
                         $('#carregando').hide();
                         //$('.carregado').show();
                     })
-
                     break;
-
             }
         })
     }
-
 }
-
-
 
 $("#cadastrar_lead").on("click", function (e) {
     e.preventDefault();
     document.getElementById("cadastrar_lead").disabled = true;
-    console.log()
+    
     switch (validar_campos()) {
         case 'erro1':
             Swal.fire({
@@ -252,8 +243,6 @@ $("#cadastrar_lead").on("click", function (e) {
     }
 })
 
-
-
 $("#termo_compromisso").on("click", function (e) {
     e.preventDefault();
 
@@ -285,7 +274,6 @@ $("#termo_compromisso").on("click", function (e) {
     })
 })
 
-
 function validar_email() {
     var email = $('#field-email').val();
 
@@ -313,8 +301,6 @@ function validar_email() {
         })
     }
 }
-
-
 
 function validar_cpf() {
 
@@ -405,8 +391,6 @@ function validar_campos() {
 
 }
 
-
-
 function VerifyCPF(CPF) {
 
     var DV1 = CalculateDigit1(CPF), DV2 = CalculateDigit2(CPF);
@@ -418,8 +402,6 @@ function VerifyCPF(CPF) {
     }
 
 }
-
-
 
 function CalculateDigit1(CPF) {
     var Weight = [10, 9, 8, 7, 6, 5, 4, 3, 2];
@@ -446,8 +428,6 @@ function CalculateDigit1(CPF) {
 
 }
 
-
-
 function CalculateDigit2(CPF) {
     var Weight = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
 
@@ -473,13 +453,9 @@ function CalculateDigit2(CPF) {
 
 }
 
-
-
 function aparecer_form() {
     $('.carregado').show();
 }
-
-
 
 function liberar_conjuge() {
     if (

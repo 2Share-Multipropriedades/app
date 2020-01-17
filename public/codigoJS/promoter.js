@@ -279,6 +279,7 @@ $("#enviar_SMS").on("click", function (e) {
                                     })
                                 },
                             }).done(function (resposta) {
+                                console.log(resposta)
                                 if (resposta == '000 - Message Sent') {
                                     Swal.fire({
                                         icon: 'success',
@@ -293,6 +294,28 @@ $("#enviar_SMS").on("click", function (e) {
                                     $('#nome').val('');
                                     $('#celular').val('');
                                     document.getElementById("enviar_SMS").disabled = false;
+
+
+                                } else if (resposta == '990 - Account Limit Reached - Please contact support') {
+                                    Swal.fire({
+                                        icon: 'warning',
+                                        html: '<div class="col-sm-12 mb-3">Não é possível enviar o SMS, faça o cadastro manual ou leia o QRcode e entre em contato com a administração</div>' +
+                                            '<div class="col-sm-12 mb-3" id="qrcode"></div>',
+                                        //'<a class="mt-3 btn btn-block btn-success2" href="https://api.whatsapp.com/send?phone=55' + numero + '&amp;text=Ol%C3%A1%20' + nome + ',,%20acesse%20o%20link%20abaixo,%20complete%20seu%20cadastro.%20Viva%20uma%20grande%20experiencia%20com%20o%20Residence%20Club%20at%20the%20Hard%20Rock%20Hotel.%0D%0D%20%20http://lead.vcisa.com/lead/' + localStorage.getItem('id_lead') + '"><img id="whats" src="../../imagens/icon_whatsapp.png" alt=""></a>',
+                                        allowOutsideClick: false,
+                                        allowEscapeKey: false,
+                                        showCancelButton: true,
+                                        confirmButtonText:'Preencher cadastro',
+                                        cancelButtonText: 'Cancelar'
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location.href = '/lead/' + codigo_lead
+                                        }
+                                    })
+                                    gerar_qrcode(localStorage.getItem('id_lead'))
+                                    $('#nome').val('');
+                                    $('#celular').val('');
+                                    document.getElementById("enviar_SMS").disabled = false;
                                 } else {
                                     Swal.fire({
                                         icon: 'error',
@@ -301,6 +324,7 @@ $("#enviar_SMS").on("click", function (e) {
                                         allowEscapeKey: false,
                                         confirmButtonText: 'Ok',
                                     })
+                                    document.getElementById("enviar_SMS").disabled = false;
                                 }
                             })
                         }

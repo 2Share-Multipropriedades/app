@@ -29,6 +29,12 @@ const Lead = db.sequelize.define('promo_lead', {
     promoter_nome:{
         type: db.Sequelize.STRING
     },
+    cidade:{
+        type: db.Sequelize.STRING
+    },
+    estado:{
+        type: db.Sequelize.STRING
+    },
     status:{
         type: db.Sequelize.STRING
     }
