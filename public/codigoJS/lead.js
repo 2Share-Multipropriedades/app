@@ -160,7 +160,9 @@ $("#cadastrar_lead").on("click", function (e) {
                         'fields[EMAIL][0][VALUE]': $('#field-email').val(),
                         'fields[EMAIL][0][VALUE_TYPE]': 'OTHER',
                         'fields[EMAIL][0][TYPE_ID]': 'EMAIL',
-                        'fields[UF_CRM_1561136312]': $('#field-cpf').val()
+                        'fields[UF_CRM_1561136312]': $('#field-cpf').val(),
+                        'fields[UF_CRM_5D4EDA09DC1AF]': $('#cidade').val(),
+                        'fields[UF_CRM_5D4EDA09EB2C7]': $('#estado').val()
                     },
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded',
