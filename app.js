@@ -6,6 +6,7 @@ const httpmsg = require('http-msgs');
 const jwt = require('jsonwebtoken');
 const apiRoutes = express.Router();
 const db = require('./models/config_banco')
+const qr = require('qr-image')
 
 
 
@@ -151,6 +152,15 @@ app.get('/teste', function (req, res) {
         script: '<script src="../../codigoJS/teste.js"></script>'
     })
 
+})
+
+app.get('/voucher/:id', (req, res) => {
+    var id = req.params.id
+    const code = qr.image(id, {type: 'png'})
+
+    res.type('png')
+
+    code.pipe(res)
 })
 //FIM Configuração das rotas
 
@@ -458,5 +468,5 @@ app.get('/carregar_parceiros', function (req, res) {
 })
 //FIM Rotas de REQUISIÇÃO
 
-//app.listen(8091)
-app.listen(81, '192.168.174.12')
+app.listen(8091)
+//app.listen(81, '192.168.174.12')
