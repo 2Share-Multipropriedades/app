@@ -162,6 +162,13 @@ app.get('/voucher/:id', (req, res) => {
 
     code.pipe(res)
 })
+
+app.get('/atv', (req, res) => {
+    res.render('voucher', {
+        title: 'Ative seu VOUCHER',
+        script: '<script src="../../codigoJS/voucher.js"></script>'
+    })
+})
 //FIM Configuração das rotas
 
 
@@ -468,5 +475,5 @@ app.get('/carregar_parceiros', function (req, res) {
 })
 //FIM Rotas de REQUISIÇÃO
 
-app.listen(8091)
+app.listen(80)
 //app.listen(81, '192.168.174.12')
