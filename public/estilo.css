@@ -119,6 +119,10 @@ body {
 .dado3{
     color: gray;
 }
+
+.hidden{
+    display: none;
+}
 /*FIM Classe com o tema da VCI*/
 
 .swal2-popup {

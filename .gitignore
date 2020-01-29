@@ -1,3 +1,8 @@
 node_modules
 public/codigoJS/teste.js
 views/teste.handlebars
+https-localhost/localhost.crt
+https-localhost/localhost.key
+https-localhost/mkcert-v1.4.0-windows-amd64.exe
+package.json
+package-lock.json

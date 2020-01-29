@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+//const app = require("https-localhost")()
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const httpmsg = require('http-msgs');
@@ -147,11 +148,11 @@ app.get('/agradecimento/negativo', function (req, res) {
 })
 
 app.get('/teste', function (req, res) {
-    res.render('teste', {
-        title: 'teste',
-        script: '<script src="../../codigoJS/teste.js"></script>'
-    })
+    //res.sendFile(__dirname+'/views/teste.html')
+})
 
+app.get('/parceiro/voucher', function (req, res) {
+    res.sendFile(__dirname+'/views/ler_qrcode.html')
 })
 
 app.get('/voucher/:id', (req, res) => {
@@ -475,6 +476,7 @@ app.get('/carregar_parceiros', function (req, res) {
 })
 //FIM Rotas de REQUISIÇÃO
 
-
-//app.listen(8091)
+//app.redirect()
+//app.listen()
 app.listen(81, '192.168.174.12')
+
