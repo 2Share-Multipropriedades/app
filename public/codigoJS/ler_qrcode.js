@@ -14,26 +14,19 @@ function ler() {
     scanner.addListener('scan', function (content, image) {
         dados = content
         if (content != '') {
-            console.log(content);
-            var lista =
-                '<ul class="list-group">' +
-                '<li class="list-group-item d-flex justify-content-between" aria-disabled="true">' +
-                '<label for="">Nome</label>' +
-                '<label for="">Eduarda Cardoso</label>' +
-                '</li>' +
-                '<li class="list-group-item d-flex justify-content-between" aria-disabled="true">' +
-                '<label for="">CPF</label>' +
-                '<label for="">135.489.477-43</label>' +
-                '</li>' +
-                '</ul>';
-            $('.modal-body').append(lista)
+            //alert(content)
 
-            $('#dados_cliente').modal('show')
-
-
+            $.ajax({
+                type: 'GET',
+                url: 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=532&deploy=1&compid=5625558&h=85568c9284b18026aa84',
+                data: {
+                    'voucher_id': content,
+                },
+            }).done(function (resposta) {
+                alert(resposta)
+            })
         }
     });
-
 
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
@@ -61,3 +54,20 @@ function confere() {
 function nao_confere() {
     alert('Os dados não conferem')
 }
+
+/*
+var lista =
+'<ul class="list-group">' +
+'<li class="list-group-item d-flex justify-content-between" aria-disabled="true">' +
+'<label for="">Nome</label>' +
+'<label for="">Eduarda Cardoso</label>' +
+'</li>' +
+'<li class="list-group-item d-flex justify-content-between" aria-disabled="true">' +
+'<label for="">CPF</label>' +
+'<label for="">135.489.477-43</label>' +
+'</li>' +
+'</ul>';
+$('.modal-body').append(lista)
+
+$('#dados_cliente').modal('show')
+*/
