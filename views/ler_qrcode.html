@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../../estilo2.css">
-    <title>Document</title>
+    <title>Parceiro - Leitura QRCode</title>
 
     <style>
         body {
@@ -43,29 +44,6 @@
         <video class="" id="preview"></video>
     </div>
 
-
-
-
-    <div class="modal fade" id="dados_cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Verifique os dados do cliente</h5>
-                </div>
-                <div class="modal-body">
-
-
-
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-danger" onclick="nao_confere()">Não confere</button>
-                    <button type="button" class="btn btn-primary" onclick="confere()">Usar agora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!--Bootstrap JS-->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -85,8 +63,21 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <!--FIM Sweet Alert-->
 
-    <script src="../../codigoJS/instascan.min.js"></script>
-    <script src="../../codigoJS/ler_qrcode.js"></script>
+    <script type="module">
+
+        import QrScanner from '../../codigoJS/qr-scanner/qr-scanner.min.js';
+        QrScanner.WORKER_PATH = '../../codigoJS/qr-scanner/qr-scanner-worker.min.js';
+        var video = document.getElementById('preview')
+        const camQrResult = document.getElementById('qr_result');
+
+        function setResult(result) {
+            alert(result)
+            console.log(result)
+        }
+
+        const scanner = new QrScanner(video, result => setResult(result));
+        scanner.start();
+    </script>
 </body>
 
 </html>
