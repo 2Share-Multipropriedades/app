@@ -73,6 +73,16 @@
         function setResult(result) {
             alert(result)
             console.log(result)
+            
+            $.ajax({
+                type: 'GET',
+                url: 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=532&deploy=1&compid=5625558&h=85568c9284b18026aa84',
+                data: {
+                    'voucher_id': result,
+                },
+            }).done(function (resposta) {
+                alert(resposta)
+            })
         }
 
         const scanner = new QrScanner(video, result => setResult(result));
