@@ -6,3 +6,5 @@ https-localhost/localhost.key
 https-localhost/mkcert-v1.4.0-windows-amd64.exe
 index.js
 ideias.txt
+views/teste.html
+package-lock.json
