@@ -74,20 +74,20 @@
         const camQrResult = document.getElementById('qr_result');
 
         function setResult(result) {
-            alert(result)
-            console.log(result)
-            
             $.ajax({
-                type: 'GET',
-                url: 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=532&deploy=1&compid=5625558&h=85568c9284b18026aa84',
+                type: 'POST',
+                url: '/netsuit/verificar',
                 data: {
-                    'voucher_id': result,
+                    voucher_id: result
                 },
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded',
+        
             }).done(function (resposta) {
-                alert(resposta)
+                console.log(resposta.dados)
+                alert(resposta.dados.message)
             })
         }
-
         const scanner = new QrScanner(video, result => setResult(result));
         scanner.start();
     </script>
