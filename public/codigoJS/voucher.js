@@ -20,17 +20,19 @@ $("#confirmar").on('click', function () {
     var id = codigo.split('-')
     id = id[0].trim() + id[1].trim()
 
-
     $.ajax({
-        type: 'GET',
-        url: 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=536&deploy=1&compid=5625558&h=423a4e1299e6856a2267',
+        type: 'POST',
+        url: '/netsuit/ativar',
         data: {
-            'voucher_id': id,
+            voucher_id: id
         },
-    }).done(function (resposta) {
-        alert(resposta)
-    })
+        dataType: 'json',
+        contentType: 'application/x-www-form-urlencoded',
 
+    }).done(function (resposta) {
+        console.log(resposta)
+        alert(resposta.dados.message)
+    })
 })
 /*
 var cont = 0
