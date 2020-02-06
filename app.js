@@ -8,7 +8,8 @@ const jwt = require('jsonwebtoken');
 const apiRoutes = express.Router();
 const db = require('./models/config_banco')
 const qr = require('qr-image')
-
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var xhr = new XMLHttpRequest();
 
 
 //Importando os Modles
@@ -434,6 +435,33 @@ app.post('/lead/confirmar-cadastro', function (req, res) {
             status: 'erro',
         })
     });
+})
+
+app.post('/netsuit/:acao', function (req, res) {
+    const data = {
+        voucher_id: req.body.voucher_id
+    }
+
+    if(req.params.acao == 'ativar'){
+        var url = 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=536&deploy=1&compid=5625558&h=423a4e1299e6856a2267';
+    }else if(req.params.acao == 'verificar'){
+        var url = 'https://5625558.extforms.netsuite.com/app/site/hosting/scriptlet.nl?script=532&deploy=1&compid=5625558&h=85568c9284b18026aa84'
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.setRequestHeader('Content-Type', 'text/plain;charset=utf-8')
+    xhr.onreadystatechange = function () {
+        
+        if (xhr.readyState == 4) {
+            if (xhr.status = 200)
+            var dados = (JSON.parse(xhr.responseText));
+            httpmsg.sendJSON(req, res, {
+               dados
+            })
+        }
+    }
+    xhr.send(JSON.stringify(data))
 })
 
 app.get('/carregar_estados', function (req, res) {
